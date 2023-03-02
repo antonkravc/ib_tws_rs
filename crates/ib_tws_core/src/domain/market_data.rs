@@ -3,14 +3,16 @@ use std::fmt;
 use std::i32;
 
 use rust_decimal::Decimal;
+use serde::Deserialize;
+use serde::Serialize;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MarketDataTypeMsg {
     pub req_id: i32,
     pub market_data_type: MarketDataType,
 }
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, Serialize, Deserialize)]
 #[repr(i32)]
 #[allow(non_camel_case_types)]
 pub enum MarketDataType {
@@ -46,7 +48,7 @@ impl fmt::Display for MarketDataType {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct DepthMktDataDescription {
     pub exchange: String,
     pub sec_type: String,
@@ -73,7 +75,7 @@ impl DepthMktDataDescription {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Bar {
     pub time: String,
     pub open: f64,
@@ -113,14 +115,14 @@ impl baseline::bar::Volume for Bar {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HistoricalTick {
     pub time: i64,
     pub price: f64,
     pub size: i64,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HistoricalTickBidAsk {
     pub time: i64,
     pub mask: i32,
@@ -130,7 +132,7 @@ pub struct HistoricalTickBidAsk {
     pub size_ask: i64,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HistoricalTickLast {
     pub time: i64,
     pub mask: i32,
@@ -140,13 +142,13 @@ pub struct HistoricalTickLast {
     pub special_conditions: String,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct HistogramEntry {
     pub price: f64,
     pub size: i64,
 }
 
-#[derive(Debug, Default, Clone)]
+#[derive(Debug, Default, Clone, Serialize, Deserialize)]
 pub struct TickAttr {
     pub can_auto_execute: bool,
     pub past_limit: bool,
@@ -156,7 +158,7 @@ pub struct TickAttr {
     pub ask_past_high: bool,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct TickByTick {
     pub tick_type: TickByTickType,
     // 0 - None, 1 - Last, 2 - AllLast, 3 -BidAsk, 4 - MidPoint
@@ -173,7 +175,7 @@ pub struct TickByTick {
     pub mid_point: f64,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[repr(i32)]
 #[allow(non_camel_case_types)]
 pub enum TickByTickType {
@@ -203,7 +205,7 @@ impl std::fmt::Display for TickByTickType {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[repr(i32)]
 #[allow(non_camel_case_types)]
 pub enum TickType {
@@ -542,7 +544,7 @@ impl From<i32> for TickType {
     }
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[repr(i32)]
 pub enum GenericTick {
     /// Currently for stocks.

@@ -1,7 +1,9 @@
 use std::default::Default;
 use std::{f64, i32};
 
-#[derive(Debug, Clone)]
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ScannerSubscription {
     // The number of rows to be returned for the query.
     pub number_of_rows: i32,

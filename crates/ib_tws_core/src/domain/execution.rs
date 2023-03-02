@@ -1,7 +1,9 @@
 use std::default::Default;
 use std::io;
 
-#[derive(Debug, Clone, Default)]
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct OrderState {
     pub status: String,
     pub init_margin_before: String,
@@ -20,7 +22,7 @@ pub struct OrderState {
     pub warning_text: String,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CommissionReport {
     pub exec_id: String,
     pub commission: f64,
@@ -30,7 +32,7 @@ pub struct CommissionReport {
     pub yield_redemption_date: i32,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[repr(i32)]
 pub enum Liquidities {
     None,
@@ -54,7 +56,7 @@ impl Liquidities {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Execution {
     pub order_id: i32,
     pub client_id: i32,
@@ -76,7 +78,7 @@ pub struct Execution {
     pub last_liquidity: Liquidities,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ExecutionFilter {
     pub client_id: i32,
     // zero means no filtering on this field

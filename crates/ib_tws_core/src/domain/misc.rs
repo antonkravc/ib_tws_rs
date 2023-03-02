@@ -1,16 +1,18 @@
-#[derive(Debug, Clone)]
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct FamilyCode {
     pub account_id: String,
     pub family_code: String,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PriceIncrement {
     pub low_edge: f64,
     pub increment: f64,
 }
 
-#[derive(Debug, Copy, Clone)]
+#[derive(Debug, Copy, Clone, Serialize, Deserialize)]
 #[repr(i32)]
 pub enum ServerLogLevel {
     System = 1,

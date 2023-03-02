@@ -1,4 +1,6 @@
-#[derive(Debug, Clone, Default)]
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct SoftDollarTier {
     pub name: String,
     pub value: String,

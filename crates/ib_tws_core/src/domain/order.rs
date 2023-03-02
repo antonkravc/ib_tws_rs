@@ -2,11 +2,13 @@ use std::fmt;
 use std::str::FromStr;
 use std::{f64, i32};
 
+use serde::{Serialize, Deserialize};
+
 use crate::domain::condition::OrderCondition;
 use crate::domain::soft_dollar_tier::SoftDollarTier;
 use crate::domain::tag_value::TagValue;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum OrderStatus {
     ApiPending,
     ApiCancelled,
@@ -32,7 +34,7 @@ impl OrderStatus {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[allow(non_camel_case_types)]
 pub enum OrderType {
     None,
@@ -173,12 +175,12 @@ impl fmt::Display for OrderType {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct OrderComboLeg {
     pub price: f64,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Order {
     // order id's
     pub client_id: i32,

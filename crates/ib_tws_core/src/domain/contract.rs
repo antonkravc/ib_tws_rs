@@ -1,9 +1,11 @@
 use std::default::Default;
 use std::io;
 
+use serde::{Serialize, Deserialize};
+
 use crate::domain::tag_value::TagValue;
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct DeltaNeutralContract {
     pub con_id: i32,
     pub delta: f64,
@@ -20,7 +22,7 @@ impl DeltaNeutralContract {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ComboLeg {
     pub con_id: i32,
     pub ratio: i32,
@@ -35,7 +37,7 @@ pub struct ComboLeg {
     pub exempt_code: i32,
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Contract {
     pub con_id: i32,
     pub symbol: String,
@@ -76,13 +78,13 @@ impl Contract {
     }
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ContractDescription {
     pub contract: Contract,
     pub derivative_sec_types: Vec<String>,
 }
 
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct ContractDetails {
     pub contract: Contract,
     pub market_name: String,
